@@ -1,9 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-<div class="container">
+<div id="myGrid" class="container">
     <h1>Using agGrid</h1>
 
-    <ag-grid-angular style="align: center;width: 600px; height: 500px;" class="ag-theme-balham" [rowData]="rowData | async" [columnDefs]="columnDefs" rowSelection="multiple">
+    <ag-grid-angular #agGrid style="align: center;width: 1500px; height: 750px;" class="ag-theme-material" [autoGroupColumnDef]="autoGroupColumnDef" [rowData]="rowData" [columnDefs]="columnDefs" rowSelection="multiple" [pagination]="true" [animateRows]="true"
+        (gridReady)="onGridReady($event)">
     </ag-grid-angular>
 </div>
 

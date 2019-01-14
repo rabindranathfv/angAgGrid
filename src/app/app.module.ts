@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 
 // libraries
 import { AgGridModule } from 'ag-grid-angular';
+import 'ag-grid-enterprise'; // agGrid enterprise
 @NgModule({
   declarations: [
     AppComponent
