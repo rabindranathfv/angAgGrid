@@ -100,36 +100,55 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.zone.runOutsideAngular(() => {
-      let chart = am4core.create('chartdiv', am4charts.XYChart);
+      let chart = am4core.create('chartdiv', am4charts.XYChart3D);
 
-      chart.paddingRight = 20;
+      chart.titles.create().text = 'Temperature Cº';
 
-      let data = [];
-      let visits = 10;
-      for (let i = 1; i < 366; i++) {
-        visits += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
-        data.push({ date: new Date(2018, 0, i), name: 'name' + i, value: visits });
-      }
+      chart.data = [{
+        'category': 'Device 1',
+        'value1': -20,
+        'value2': 70
+      }];
 
-      chart.data = data;
-
-      let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-      dateAxis.renderer.grid.template.location = 0;
+      // Create axes
+      let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+      categoryAxis.dataFields.category = 'category';
+      categoryAxis.renderer.grid.template.location = 0;
+      categoryAxis.renderer.grid.template.strokeOpacity = 0;
 
       let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-      valueAxis.tooltip.disabled = true;
-      valueAxis.renderer.minWidth = 35;
+      valueAxis.renderer.grid.template.strokeOpacity = 0;
+      valueAxis.min = -50;
+      valueAxis.max = 100;
+      valueAxis.strictMinMax = true;
+      valueAxis.renderer.baseGrid.disabled = true;
+      valueAxis.renderer.labels.template.adapter.add('text', (text: any) => {
+      if ((text > 100) || (text < -51)) {
+        return '';
+      } else {
+        return text + 'Cº';
+        }
+      });
 
-      let series = chart.series.push(new am4charts.LineSeries());
-      series.dataFields.dateX = 'date';
-      series.dataFields.valueY = 'value';
+      // Create series
+      let series1 = chart.series.push(new am4charts.ConeSeries());
+      series1.dataFields.valueY = 'value1';
+      series1.dataFields.categoryX = 'category';
+      series1.columns.template.width = am4core.percent(80);
+      series1.columns.template.fillOpacity = 0.9;
+      series1.columns.template.strokeOpacity = 1;
+      series1.columns.template.strokeWidth = 2;
 
-      series.tooltipText = '{valueY.value}';
-      chart.cursor = new am4charts.XYCursor();
-
-      let scrollbarX = new am4charts.XYChartScrollbar();
-      scrollbarX.series.push(series);
-      chart.scrollbarX = scrollbarX;
+      let series2 = chart.series.push(new am4charts.ConeSeries());
+      series2.dataFields.valueY = 'value2';
+      series2.dataFields.categoryX = 'category';
+      series2.stacked = true;
+      series2.columns.template.width = am4core.percent(80);
+      series2.columns.template.fill = am4core.color('#000');
+      series2.columns.template.fillOpacity = 0.1;
+      series2.columns.template.stroke = am4core.color('#000');
+      series2.columns.template.strokeOpacity = 0.2;
+      series2.columns.template.strokeWidth = 2;
 
       this.chart = chart;
     });
