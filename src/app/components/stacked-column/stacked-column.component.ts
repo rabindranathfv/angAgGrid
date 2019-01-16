@@ -12,10 +12,11 @@ export class StackedColumnComponent implements OnInit {
 
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
+    scaleStartValue: 0,
   };
   // public barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartLabels: string[] = ['Device 1'];
+  public barChartLabels: string[] = ['Device 1','Device 2'];
   public barChartType = 'bar';
   public barChartLegend = true;
 
@@ -24,7 +25,7 @@ export class StackedColumnComponent implements OnInit {
     {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
   ]; */
   public barChartData: any[] = [
-    {data: [65], label: 'Temperature'}
+    {data: [50, 25], label: 'Temperature'}
   ];
 
   constructor( ) { }

@@ -105,8 +105,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
       chart.data = [{
         'category': 'Device 1',
-        'value1': -40,
-        'value2': 90
+        'value1': 40,
+        'value2': 80
       }];
 
       // Create axes
@@ -117,7 +117,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
       let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
       valueAxis.renderer.grid.template.strokeOpacity = 0;
-      valueAxis.min = -50;
+      valueAxis.min = 0;
       valueAxis.max = 100;
       valueAxis.strictMinMax = true;
       valueAxis.renderer.baseGrid.disabled = true;
