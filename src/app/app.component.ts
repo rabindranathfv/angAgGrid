@@ -7,7 +7,6 @@ import { AgGridNg2 } from 'ag-grid-angular';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 am4core.useTheme(am4themes_animated);
 
 @Component({
@@ -106,8 +105,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
       chart.data = [{
         'category': 'Device 1',
-        'value1': -20,
-        'value2': 70
+        'value1': -40,
+        'value2': 90
       }];
 
       // Create axes
@@ -123,7 +122,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       valueAxis.strictMinMax = true;
       valueAxis.renderer.baseGrid.disabled = true;
       valueAxis.renderer.labels.template.adapter.add('text', (text: any) => {
-      if ((text > 100) || (text < -51)) {
+      if ((text > 110) || (text < -51)) {
         return '';
       } else {
         return text + 'Cº';

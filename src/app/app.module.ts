@@ -6,16 +6,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 // libraries
+import { ChartsModule } from 'ng2-charts';
 import { AgGridModule } from 'ag-grid-angular';
-import 'ag-grid-enterprise'; // agGrid enterprise
+import 'ag-grid-enterprise';
+import { StackedColumnComponent } from './components/stacked-column/stacked-column.component'; // agGrid enterprise
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StackedColumnComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ChartsModule,
     AgGridModule.withComponents([])
   ],
   providers: [],
